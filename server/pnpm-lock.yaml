@@ -6,11 +6,13 @@ importers:
     specifiers:
       '@companieshouse/api-sdk-node': ^2.0.35
       '@types/node': ^18.0.0
+      dotenv: ^16.0.2
       typescript: ^4.7.4
     dependencies:
       '@companieshouse/api-sdk-node': 2.0.35
     devDependencies:
       '@types/node': 18.7.18
+      dotenv: 16.0.2
       typescript: 4.8.3
 
 packages:
@@ -107,6 +109,11 @@ packages:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
     dev: false
+
+  /dotenv/16.0.2:
+    resolution: {integrity: sha512-JvpYKUmzQhYoIFgK2MOnF3bciIZoItIIoryihy0rIA+H4Jy0FmgyKYAHCTN98P5ybGSJcIFbh6QKeJdtZd1qhA==}
+    engines: {node: '>=12'}
+    dev: true
 
   /ecc-jsbn/0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
