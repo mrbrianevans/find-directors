@@ -1,0 +1,26 @@
+functions:
+- github:
+    branch: master
+    deploy_on_push: true
+    repo: mrbrianevans/find-directors
+  name: find-directors-server
+  routes:
+  - path: /find-directors-server
+  source_dir: server
+name: find-directors
+region: lon
+static_sites:
+- build_command: npm run build
+  environment_slug: node-js
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: mrbrianevans/find-directors
+  name: find-directors-client
+  routes:
+  - path: /api
+  source_dir: client
+  envs:
+    - key: FUNCTION_API_URL
+      scope: BUILD_TIME
+      value: ${find-directors-server.PUBLIC_URL}
