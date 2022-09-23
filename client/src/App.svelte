@@ -1,13 +1,16 @@
 <script lang="ts">
+  import {callFunction} from "./lib/callFunction.js";
+
   const FUNCTION_API_URL = import.meta.env.VITE_FUNCTION_API_URL;
 
-  let output, duration, value = 'Svelte'
-  async function get(lang='js'){
-    const startTime = performance.now()
-    const path = lang === 'js' ? '/sample/hellojs?name=' : '/sample/hello?name='
-    const res = await fetch(FUNCTION_API_URL + path + value)
-    duration = performance.now() - startTime
-    output = await res.text()
+  let typedCompanyName = '', results
+  async function findDirectors(){
+    results = await callFunction('ch', 'searchForCompany', {urlSearchParams:{companyName: typedCompanyName}})
+    console.log(results)
+  }
+
+  async function typeahead(){
+    // get suggestions for company name based on what's been typed
   }
 </script>
 
@@ -19,14 +22,13 @@
     GET {FUNCTION_API_URL}
   </pre>
 
-  <input type="text" placeholder="Name" bind:value/>
-  <button on:click={()=>get('js')}>GET (JS)</button>
-  <button on:click={()=>get('go')}>GET (Go)</button>
+  <input type="text" placeholder="Company name" bind:value={typedCompanyName}/>
+  <button on:click={findDirectors}>Find</button>
 
-  {#if output}
-    <pre>{output}</pre>
-    <p>In {duration} milliseconds</p>
-  {/if}
+
+  <pre>
+    {JSON.stringify(results??{})}
+  </pre>
 </main>
 
 <style>

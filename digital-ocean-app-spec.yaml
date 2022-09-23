@@ -1,5 +1,10 @@
 functions:
-  - github:
+  - envs:
+      - key: CH_API_KEY
+        scope: RUN_TIME
+        type: SECRET
+        value: EV[1:9KCjtIlU8sweUkDzS9bqEtYGFa20WUit:iy96zj6TToin50FSA2x3ztFFHpiT7Z7/XecOmfjBmo/Oqz5kWCT2vD8smH2kj6ujlQfAHQ==]
+    github:
       branch: master
       deploy_on_push: true
       repo: mrbrianevans/find-directors

@@ -1,5 +1,5 @@
 {
-  "name": "hellojs",
+  "name": "search-for-company",
   "version": "1.0.0",
   "author": "Brian Evans",
   "type": "module",
@@ -10,7 +10,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "camelcase": "^7.0.0"
+    "@companieshouse/api-sdk-node": "^2.0.35"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",

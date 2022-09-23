@@ -1,22 +1,13 @@
 environment: {}
 parameters: {}
 packages:
-  - name: sample
-    environment: {}
+  - name: ch
+    environment:
+      CH_API_KEY: ${CH_API_KEY}
     parameters: {}
     annotations: {}
     functions:
-      - name: hello
-        binary: false
-        main: ''
-        runtime: 'go:default'
-        web: true
-        parameters: {}
-        environment: {}
-        annotations: {}
-        limits: {}
-
-      - name: hellojs
+      - name: searchForCompany
         binary: false
         main: ''
         runtime: 'nodejs:18'
@@ -25,4 +16,3 @@ packages:
         environment: {}
         annotations: {}
         limits: {}
-
