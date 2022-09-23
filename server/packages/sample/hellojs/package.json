@@ -10,6 +10,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "camelcase": "^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",

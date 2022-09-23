@@ -1,5 +1,5 @@
 <script lang="ts">
-  const FUNCTION_API_URL = "%%FUNCTION_API_URL%%";
+  const FUNCTION_API_URL = import.meta.env.VITE_FUNCTION_API_URL;
 
   let output, duration
   async function get(){
