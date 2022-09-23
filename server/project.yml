@@ -1,0 +1,28 @@
+environment: {}
+parameters: {}
+packages:
+  - name: sample
+    environment: {}
+    parameters: {}
+    annotations: {}
+    functions:
+      - name: hello
+        binary: false
+        main: ''
+        runtime: 'go:default'
+        web: true
+        parameters: {}
+        environment: {}
+        annotations: {}
+        limits: {}
+
+      - name: hellojs
+        binary: false
+        main: 'index.js'
+        runtime: 'nodejs:18'
+        web: true
+        parameters: {}
+        environment: {}
+        annotations: {}
+        limits: {}
+
