@@ -18,7 +18,7 @@ packages:
 
       - name: hellojs
         binary: false
-        main: 'index.js'
+        main: ''
         runtime: 'nodejs:18'
         web: true
         parameters: {}

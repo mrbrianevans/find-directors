@@ -15,7 +15,7 @@ static_sites:
     envs:
       - key: VITE_FUNCTION_API_URL
         scope: BUILD_TIME
-        value: ${find-directors-server.PUBLIC_URL}
+        value: "${find-directors-server.PUBLIC_URL}"
     github:
       branch: master
       deploy_on_push: true
