@@ -9,7 +9,7 @@ packages:
     functions:
       - name: searchForCompany
         binary: false
-        main: ''
+        main: 'main'
         runtime: 'nodejs:18'
         web: true
         parameters: {}

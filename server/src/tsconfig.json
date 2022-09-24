@@ -5,7 +5,9 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true
+    "importsNotUsedAsValues": "error", // this is so that esbuild can remove any typescript only packages
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
   },
   "exclude": [
     "node_modules"
