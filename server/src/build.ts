@@ -14,17 +14,18 @@ async function buildFunctions(packagesSrcDir, outdir) {
     const startTime = performance.now()
     console.log('Source code directory: ', packagesSrcDir)
     console.log('Output directory: ', outdir)
+    const packageOutDir = resolve(outdir, 'packages')
     const packages = await readdir(packagesSrcDir)
     console.log('Found', packages.length, packages.length === 1 ? 'package' : 'packages')
     const project = {packages: packages.map(p=>({name:p, functions: <{name:string, runtime: string}[]>[]}))}
     for (const packageName of packages) {
-        await mkdir(resolve(outdir, packageName), {recursive: true})
+        await mkdir(resolve(packageOutDir, packageName), {recursive: true})
         const functions = await readdir(resolve(packagesSrcDir, packageName))
         for (const functionName of functions) {
             console.time("Built " + packageName + '/' + functionName)
             const res = await build({
                 bundle: true,
-                outfile: resolve(outdir, packageName, functionName + '.js'),
+                outfile: resolve(packageOutDir, packageName, functionName + '.js'),
                 entryPoints: [resolve(packagesSrcDir, packageName, functionName, 'index.ts')],
                 format: 'cjs', platform: 'node', minify: true
             })

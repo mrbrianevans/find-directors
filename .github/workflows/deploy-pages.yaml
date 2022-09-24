@@ -6,6 +6,10 @@ jobs:
   build-pages:
     runs-on: ubuntu-latest
     steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.2.2
@@ -21,12 +25,12 @@ jobs:
         run: pnpm install
         working-directory: client
       - name: Build client with Vite
-        run: pnpm run build
+        run: pnpm run build >> $GITHUB_STEP_SUMMARY
         working-directory: client
         env:
           VITE_FUNCTION_API_URL: https://faas-lon1-917a94a7.doserverless.co/api/v1/web/fn-46d12ce4-d414-4332-88a4-451f0dc67ff5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact
+        uses: actions/upload-pages-artifact@v1.0.4
         with:
           path: 'client/dist'
   deploy:

@@ -4,9 +4,16 @@ on:
   push:
 
 jobs:
-  build-server:
+  build-server-and-deploy:
+    name: 'Build typescript, bundle with esbuild, and deploy to digital ocean'
     runs-on: ubuntu-latest
     steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Install doctl serverless support
+        run: doctl serverless install && doctl serverless connect
       - name: Checkout
         uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.2.2
@@ -27,8 +34,12 @@ jobs:
       - name: Test functions
         env:
           CH_API_KEY: ${{ secrets.CH_API_KEY }}
-        run: pnpm run test
+        run: pnpm run test >> $GITHUB_STEP_SUMMARY
         working-directory: server/src
       - name: Build functions
-        run: pnpm run build:functions
+        run: pnpm run build:functions >> $GITHUB_STEP_SUMMARY
         working-directory: server/src
+      - name: Deploy functions
+        run: doctl serverless deploy server >> $GITHUB_STEP_SUMMARY
+        env:
+          CH_API_KEY: ${{ secrets.CH_API_KEY }}
