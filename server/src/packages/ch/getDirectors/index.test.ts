@@ -31,7 +31,6 @@ await test('test getDirectors function invocation', async function(t){
     console.log('Returned ', response)
     assert.equal(response.statusCode, 200)
     const responseBody = JSON.parse(response.body)
-    assert('activeCount' in responseBody, 'activeCount not returned in response body')
     assert('items' in responseBody, 'items not returned in response body')
     if(responseBody.items.length > 0) assert('name' in responseBody.items[0], 'name not in first item')
   })

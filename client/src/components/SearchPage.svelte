@@ -6,10 +6,23 @@
 
   let typedCompanyName = '', company, directors
   async function findCompany(){
+    company = undefined
+    directors = undefined
     company = await callFunction('ch', 'searchForCompany', {urlSearchParams:{companyName: typedCompanyName}})
   }
   async function findDirectors(){
     directors = await callFunction('ch', 'getDirectors', {urlSearchParams: {companyNumber: company.company_number}})
+  }
+
+  function getAge(dateOfBirth: {year: number, month: number, day?: number}){
+    dateOfBirth.day ??= 1
+    const born = new Date(dateOfBirth.year, dateOfBirth.month-1, dateOfBirth.day)
+    const differenceMs = Date.now() - born.getTime()
+    return Math.floor(differenceMs / 1000 / 86400 / 365)
+  }
+
+  function startsWithVowel(str: string){
+    return /^[aeiou]/i.test(str)
   }
 </script>
 
@@ -31,11 +44,18 @@
     {/if}
 
     {#if directors}
-        <div>
-            <pre>
-                {JSON.stringify(directors, null, 2)}
-            </pre>
-        </div>
+        <Message>
+            <h2>Directors of {company.company_name}</h2>
+
+            {#each directors.items as director}
+                <p>
+                    {director.name.join(' ')} is {getAge(director.dateOfBirth)} years old.
+                    {#if director.nationality && director.occupation}
+                        {director.name[0].split(' ')[0]} is a{startsWithVowel(director.nationality)?'n':''} {director.nationality} {director.occupation}.
+                    {/if}
+                </p>
+            {/each}
+        </Message>
     {/if}
 
 </div>
