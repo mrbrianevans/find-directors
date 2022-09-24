@@ -16,3 +16,12 @@ packages:
         environment: {}
         annotations: {}
         limits: {}
+      - name: getDirectors
+        binary: false
+        main: 'main'
+        runtime: 'nodejs:18'
+        web: true
+        parameters: {}
+        environment: {}
+        annotations: {}
+        limits: {}

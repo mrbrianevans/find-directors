@@ -3,7 +3,7 @@ import assert from "assert";
 import {main} from "./index.js";
 
 
-await test('test function invocation', async function(t){
+await test('test searchForCompany function invocation', async function(t){
 
   await t.test('check for API key', async function(){
     assert(process.env.CH_API_KEY, "API key is not in environment variable")
