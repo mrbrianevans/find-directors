@@ -1,36 +1,49 @@
 <script lang="ts">
-  import {callFunction} from "./lib/callFunction.js";
+  import SearchPage from "./components/SearchPage.svelte";
+  import Button from "./components/Button.svelte";
 
-  const FUNCTION_API_URL = import.meta.env.VITE_FUNCTION_API_URL;
 
-  let typedCompanyName = '', results
-  async function findDirectors(){
-    results = await callFunction('ch', 'searchForCompany', {urlSearchParams:{companyName: typedCompanyName}})
-    console.log(results)
-  }
-
-  async function typeahead(){
-    // get suggestions for company name based on what's been typed
+  let theme = 'alpine'
+  function toggleTheme(){
+    if(theme === 'alpine') theme = 'carbon'
+    else theme = 'alpine'
   }
 </script>
 
 <main>
 
   <h1>Find directors</h1>
+  <div class="top-bar">
+    <Button label="Toggle theme" on:click={toggleTheme} variant="secondary"/>
+  </div>
 
-  <pre>
-    GET {FUNCTION_API_URL}
-  </pre>
+  <hr/>
 
-  <input type="text" placeholder="Company name" bind:value={typedCompanyName}/>
-  <button on:click={findDirectors}>Find</button>
+  <SearchPage/>
 
+  <hr/>
 
-  <pre>
-    {JSON.stringify(results??{})}
-  </pre>
+  <link href="themes/{theme}.css" rel="stylesheet"/>
 </main>
 
 <style>
+
+  h1{
+    font-size: 4rem;
+  }
+
+  div.top-bar{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 2rem;
+    font-size: smaller;
+  }
+
+  main{
+    display: grid;
+    place-items: stretch;
+    max-width: 60rem;
+    margin: auto;
+  }
 
 </style>

@@ -1,0 +1,13 @@
+html{
+    font-family: 'Inter', sans-serif;
+    color: VAR(--text-color);
+    background: VAR(--bg-color);
+}
+h1,h2,h3,h4,h5,h6{
+    color: VAR(--main-color);
+}
+hr{
+    margin: 0.5rem 0.5rem;
+    border: none;
+    border-bottom: 1px solid VAR(--text-color);
+}
