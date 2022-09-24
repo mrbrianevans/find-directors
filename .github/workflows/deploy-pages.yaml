@@ -23,6 +23,8 @@ jobs:
       - name: Build client with Vite
         run: pnpm run build
         working-directory: client
+        env:
+          VITE_FUNCTION_API_URL: https://faas-lon1-917a94a7.doserverless.co/api/v1/web/fn-46d12ce4-d414-4332-88a4-451f0dc67ff5
       - name: Upload artifact
         uses: actions/upload-pages-artifact
         with:
@@ -40,5 +42,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v1.2.0
 

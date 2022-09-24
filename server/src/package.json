@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build:types": "tsc --build",
-    "build:functions": "node --experimental-import-meta-resolve build.js",
+    "build:functions": "node build.js packages ..",
     "build": "tsc --build && node --experimental-import-meta-resolve build.js",
     "watch:types": "tsc --build --watch",
     "clean": "tsc --build --clean",
