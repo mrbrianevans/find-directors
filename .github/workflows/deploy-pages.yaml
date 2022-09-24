@@ -1,6 +1,8 @@
 name: 'Deploy frontend to GitHub pages'
 on:
   push:
+    paths:
+      - client
 
 jobs:
   build-pages:

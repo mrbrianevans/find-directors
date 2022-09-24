@@ -4,10 +4,10 @@
   import Button from "./Button.svelte";
   import Message from "./Message.svelte";
 
-  let typedCompanyName = '', company, directors
+  let typedCompanyName = '', company, directors = {items:[]}
   async function findCompany(){
     company = undefined
-    directors = undefined
+    directors = {items:[]}
     company = await callFunction('ch', 'searchForCompany', {urlSearchParams:{companyName: typedCompanyName}})
   }
   async function findDirectors(){
@@ -32,18 +32,18 @@
 
     <div class="inputArea">
         <TextBox placeholder="Company name" bind:value={typedCompanyName} />
-        <Button on:click={findCompany} label="Find"></Button>
+        <Button on:click={()=>findCompany().then(findDirectors)} label="Find"></Button>
     </div>
 
 
-    {#if company}
-        <Message>
-            <p>Are you looking for {company.company_name}?</p>
-            <Button on:click={findDirectors} label="Confirm"></Button>
-        </Message>
-    {/if}
+    <!--{#if company}-->
+    <!--    <Message>-->
+    <!--        <p>Are you looking for {company.company_name}?</p>-->
+    <!--        <Button on:click={findDirectors} label="Confirm"></Button>-->
+    <!--    </Message>-->
+    <!--{/if}-->
 
-    {#if directors}
+    {#if company}
         <Message>
             <h2>Directors of {company.company_name}</h2>
 

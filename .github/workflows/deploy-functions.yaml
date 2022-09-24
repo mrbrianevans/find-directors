@@ -2,6 +2,8 @@
 name: 'build and deploy serverless functions'
 on:
   push:
+    paths:
+      - server
 
 jobs:
   build-server-and-deploy:
