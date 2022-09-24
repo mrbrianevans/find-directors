@@ -1,0 +1,34 @@
+
+name: 'build and deploy serverless functions'
+on:
+  push:
+
+jobs:
+  build-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: pnpm
+          cache-dependency-path: 'server/pnpm-lock.yaml'
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: server
+      - name: Build server typescript
+        run: pnpm run build:types
+        working-directory: server/src
+      - name: Test functions
+        env:
+          CH_API_KEY: ${{ secrets.CH_API_KEY }}
+        run: pnpm run test
+        working-directory: server/src
+      - name: Build functions
+        run: pnpm run build:functions
+        working-directory: server/src
