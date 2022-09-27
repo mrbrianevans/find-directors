@@ -1,7 +1,7 @@
 import {callApi} from "../../../shared/callApi.js";
-import type {Schema} from "jsonschema";
-import {respondToInvocation} from "../../../shared/respondToInvocation.js";
+
 import type { CompanyOfficersResource,CompanyOfficerResource } from "@companieshouse/api-sdk-node/dist/services/company-officers/types.js";
+import {InputSchema, wrapFunctionWithSchema} from "do-functions";
 
 async function officersSearch(companyNumber: string, limit = 20, publicRegister = false){
   return callApi<CompanyOfficersResource>(`/company/${companyNumber}/officers?items_per_page=${limit}${publicRegister?'&register_view=true&register_type=directors':''}`)
@@ -30,7 +30,7 @@ async function logic({companyNumber}){
   }
 }
 
-const schema: Schema = {type: 'object', properties: {companyNumber: {type:'string', minLength: 8, maxLength: 8}}, required:['companyNumber']}
+const schema: InputSchema = {type: 'object', properties: {companyNumber: {type:'string', minLength: 8, maxLength: 8}}, required:['companyNumber']}
 
-export const main = respondToInvocation(schema, logic)
+export const main = wrapFunctionWithSchema(logic, schema)
 
