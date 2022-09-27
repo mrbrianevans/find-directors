@@ -30,18 +30,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         working-directory: server
-      - name: Build server typescript
+      - name: Compile server typescript
         run: pnpm run build:types
-        working-directory: server/src
+        working-directory: server
       - name: Test functions
         env:
           CH_API_KEY: ${{ secrets.CH_API_KEY }}
         run: pnpm run test >> $GITHUB_STEP_SUMMARY
-        working-directory: server/src
+        working-directory: server
       - name: Build functions
         run: pnpm run build:functions >> $GITHUB_STEP_SUMMARY
-        working-directory: server/src
+        working-directory: server
       - name: Deploy functions
-        run: doctl serverless deploy server >> $GITHUB_STEP_SUMMARY
+        run: pnpm deploy >> $GITHUB_STEP_SUMMARY
         env:
           CH_API_KEY: ${{ secrets.CH_API_KEY }}
+        working-directory: server
