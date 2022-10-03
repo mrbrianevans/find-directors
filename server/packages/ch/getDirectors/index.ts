@@ -21,7 +21,7 @@ async function logic({companyNumber}){
   if(matches.httpStatusCode >= 200 && matches.httpStatusCode < 300 && matches.resource) {
     const {items} = matches.resource
     return {items: items.filter(officerIsActiveDirector)
-        .map(i=>({name: i.name.split(', ').reverse(), dateOfBirth: i.date_of_birth, nationality: i.nationality, occupation: i.occupation}))
+        .map(i=>({name: i.name.split(', ').reverse(), dateOfBirth: i.date_of_birth, nationality: i.nationality, occupation: i.occupation, linkPath: i.links.officer.appointments}))
     }
   }
   else{

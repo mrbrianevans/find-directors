@@ -45,11 +45,11 @@
 
     {#if company}
         <Message>
-            <h2>Directors of {company.company_name}</h2>
+            <h2>Directors of <a href="https://find-and-update.company-information.service.gov.uk/company/{company.company_number}">{company.company_name}</a></h2>
 
             {#each directors.items as director}
                 <p>
-                    {director.name.join(' ')} is {getAge(director.dateOfBirth)} years old.
+                    <a href="https://find-and-update.company-information.service.gov.uk{director.linkPath}">{director.name.join(' ')}</a> is {getAge(director.dateOfBirth)} years old.
                     {#if director.nationality && director.occupation}
                         {director.name[0].split(' ')[0]} is a{startsWithVowel(director.nationality)?'n':''} {director.nationality} {director.occupation}.
                     {/if}
