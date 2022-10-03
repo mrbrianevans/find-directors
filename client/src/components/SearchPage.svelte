@@ -3,17 +3,17 @@
   import TextBox from "./TextBox.svelte";
   import Button from "./Button.svelte";
   import Message from "./Message.svelte";
+  import {company, companyNameSearch, directors} from "../lib/companyStore.js";
 
-  let typedCompanyName = '', company, directors = {items:[]}
   async function findCompany(){
-    company = undefined
-    directors = {items:[]}
-    company = await callFunction('ch', 'searchForCompany', {urlSearchParams:{companyName: typedCompanyName}})
+    company.reset()
+    directors.reset()
+    $company = await callFunction('ch', 'searchForCompany', {urlSearchParams:{companyName: $companyNameSearch}})
   }
-  async function findDirectors(){
-    directors = await callFunction('ch', 'getDirectors', {urlSearchParams: {companyNumber: company.company_number}})
+  async function findDirectors(companyNumber){
+    $directors = await callFunction('ch', 'getDirectors', {urlSearchParams: {companyNumber}})
   }
-
+  $: if($company?.company_number) findDirectors($company.company_number) // whenever company number changes, find the directors
   function getAge(dateOfBirth: {year: number, month: number, day?: number}){
     dateOfBirth.day ??= 1
     const born = new Date(dateOfBirth.year, dateOfBirth.month-1, dateOfBirth.day)
@@ -31,23 +31,15 @@
 
 
     <div class="inputArea">
-        <TextBox placeholder="Company name" bind:value={typedCompanyName} />
-        <Button on:click={()=>findCompany().then(findDirectors)} label="Find"></Button>
+        <TextBox placeholder="Company name" bind:value={$companyNameSearch} />
+        <Button on:click={()=>findCompany()} label="Find"></Button>
     </div>
 
-
-    <!--{#if company}-->
-    <!--    <Message>-->
-    <!--        <p>Are you looking for {company.company_name}?</p>-->
-    <!--        <Button on:click={findDirectors} label="Confirm"></Button>-->
-    <!--    </Message>-->
-    <!--{/if}-->
-
-    {#if company}
+    {#if $company}
         <Message>
-            <h2>Directors of <a href="https://find-and-update.company-information.service.gov.uk/company/{company.company_number}">{company.company_name}</a></h2>
+            <h2>Directors of <a href="https://find-and-update.company-information.service.gov.uk/company/{$company.company_number}">{$company.company_name}</a></h2>
 
-            {#each directors.items as director}
+            {#each $directors.items as director}
                 <p>
                     <a href="https://find-and-update.company-information.service.gov.uk{director.linkPath}">{director.name.join(' ')}</a> is {getAge(director.dateOfBirth)} years old.
                     {#if director.nationality && director.occupation}

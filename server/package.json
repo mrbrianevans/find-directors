@@ -8,17 +8,17 @@
     "build:functions": "do-functions",
     "build:types": "tsc --build",
     "test": "node -r dotenv/config --test",
-    "serve": "do-functions-server",
+    "serve": "do-functions-server --project-yml ../project.yml",
     "deploy": "doctl serverless deploy build"
   },
   "dependencies": {
     "do-functions": "^1.0.5"
   },
   "devDependencies": {
-    "@companieshouse/api-sdk-node": "^2.0.37",
-    "@types/node": "^18.0.0",
-    "do-functions-server": "^1.0.1",
-    "dotenv": "^16.0.2",
-    "typescript": "^4.7.4"
+    "@companieshouse/api-sdk-node": "^2.0.38",
+    "@types/node": "^18.8.0",
+    "do-functions-server": "^1.2.0",
+    "dotenv": "^16.0.3",
+    "typescript": "^4.8.4"
   }
 }
