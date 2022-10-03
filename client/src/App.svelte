@@ -2,20 +2,15 @@
   import SearchPage from "./components/SearchPage.svelte";
   import Button from "./components/Button.svelte";
   import Footer from "./components/Footer.svelte";
+  import {theme} from "./lib/theme.js";
 
-
-  let theme = 'alpine'
-  function toggleTheme(){
-    if(theme === 'alpine') theme = 'carbon'
-    else theme = 'alpine'
-  }
 </script>
 
 <main>
 
   <h1>Find directors</h1>
   <div class="top-bar">
-    <Button label="Toggle theme" on:click={toggleTheme} variant="secondary"/>
+    <Button label="Toggle theme" on:click={theme.toggle} variant="secondary"/>
   </div>
 
   <hr/>
@@ -26,7 +21,7 @@
 
   <Footer/>
 
-  <link href="themes/{theme}.css" rel="stylesheet"/>
+  <link href="themes/{$theme}.css" rel="stylesheet"/>
 </main>
 
 <style>
