@@ -11,6 +11,11 @@ Server side code written in NodeJS and executed in serverless functions on Digit
 
 Frontend code written in Svelte and compiled to static files, deployed on GitHub Pages.
 
+
+
+The [`do-functions`](https://www.npmjs.com/package/do-functions) package from NPM is used for the serverless functions. 
+
+
 ## Building
 
 To build the server
@@ -30,7 +35,7 @@ pnpm build
 
 ## Testing
 The server has tests written for each function. 
-Can be run after following build steps above with this command in `server/src`:
+Can be run after following build steps above with this command in `server`:
 ```bash
 pnpm test
 ```

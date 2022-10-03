@@ -1,6 +1,7 @@
 <script lang="ts">
   import SearchPage from "./components/SearchPage.svelte";
   import Button from "./components/Button.svelte";
+  import Footer from "./components/Footer.svelte";
 
 
   let theme = 'alpine'
@@ -22,6 +23,8 @@
   <SearchPage/>
 
   <hr/>
+
+  <Footer/>
 
   <link href="themes/{theme}.css" rel="stylesheet"/>
 </main>
