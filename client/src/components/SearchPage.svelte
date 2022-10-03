@@ -5,6 +5,8 @@
   import Message from "./Message.svelte";
   import {company, companyNameSearch, directors} from "../lib/companyStore.js";
 
+  //todo: onMount, get the company name in the URL search bar and set it to the search query to allow redirects here
+
   async function findCompany(){
     company.reset()
     directors.reset()

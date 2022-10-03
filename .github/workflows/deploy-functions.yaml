@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Install doctl serverless support
-        run: doctl serverless install && doctl serverless connect
+        run: doctl serverless install && doctl serverless connect find-directors
       - name: Checkout
         uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.2.2
