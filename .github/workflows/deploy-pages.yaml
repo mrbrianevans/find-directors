@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - client/**
+      - .github/workflows/deploy-pages.yaml
 
 jobs:
   build-pages:
