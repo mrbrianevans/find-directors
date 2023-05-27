@@ -16,6 +16,7 @@ async function logic({companyName}){
     return {company_number, company_name, company_status}
   }
   else{
+    console.error(matches)
     throw new Error('Failed to call Companies House API')
   }
 }

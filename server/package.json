@@ -12,13 +12,13 @@
     "deploy": "doctl serverless deploy build"
   },
   "dependencies": {
-    "do-functions": "^1.0.5"
+    "do-functions": "^1.2.1"
   },
   "devDependencies": {
-    "@companieshouse/api-sdk-node": "^2.0.38",
-    "@types/node": "^18.8.0",
-    "do-functions-server": "^1.2.0",
+    "@companieshouse/api-sdk-node": "^2.0.77",
+    "@types/node": "^18.16.16",
+    "do-functions-server": "^1.4.0",
     "dotenv": "^16.0.3",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   }
 }
