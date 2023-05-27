@@ -33,7 +33,7 @@
 
 
     <div class="inputArea">
-        <TextBox placeholder="Company name" bind:value={$companyNameSearch} />
+        <TextBox placeholder="Company name" bind:value={$companyNameSearch} on:enter={()=>findCompany()}/>
         <Button on:click={()=>findCompany()} label="Find"></Button>
     </div>
 
