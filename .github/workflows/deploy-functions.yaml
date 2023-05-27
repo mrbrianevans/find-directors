@@ -42,7 +42,7 @@ jobs:
         run: pnpm run build:functions >> $GITHUB_STEP_SUMMARY
         working-directory: server
       - name: Deploy functions
-        run: pnpm deploy >> $GITHUB_STEP_SUMMARY
+        run: pnpm run deploy >> $GITHUB_STEP_SUMMARY
         env:
           CH_API_KEY: ${{ secrets.CH_API_KEY }}
         working-directory: server
